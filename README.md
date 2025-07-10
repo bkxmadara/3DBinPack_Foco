@@ -20,3 +20,9 @@ penalidade por afastamento do centro de gravidade do caminhao
 
 leitura recursiva de cargas que estão em cima de outra carga
 	caso ultrapasse o valor total, será penalizado
+
+falta
+	divisão do peso pelas bases (está considerano apenas uma base)
+ 	divisão do peso pelos eixos
+  	mudar a familia teste para grupo de itens para um comprador (implica na criação da classe compra)
+   	
