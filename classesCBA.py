@@ -11,17 +11,28 @@ class Caminhao:
         self.carga_por_eixo = carga_por_eixo
         self.quantidade_eixos = quantidade_eixos
 
-    def volume_carga(self):
+        self.status = "disponível"
+        self.lista_cargas = []
+        self.sobra_volume = None
+        self.sobra_carga = None
+
+    def volume(self):
         return self.altura * self.largura * self.profundidade
 
     def capacidade_total_carga(self):
         return self.carga_por_eixo * self.quantidade_eixos
+    
+    def set_sobra_volume(self, sobra):
+        self.sobra_volume = sobra
+
+    def set_sobra_carga(self, sobra):
+        self.sobra_carga = sobra
 
     def __str__(self):
         return (f"Caminhão {self.nome} (ID: {self.id})\n"
                 f"Tipo de carga: {self.tipo_carga}\n"
                 f"Dimensões (A x L x P): {self.altura} x {self.largura} x {self.profundidade} m\n"
-                f"Volume da carga: {self.volume_carga()} m³\n"
+                f"Volume da carga: {self.volume()} m³\n"
                 f"Eixos: {self.quantidade_eixos} com {self.carga_por_eixo} kg por eixo\n"
                 f"Capacidade total: {self.capacidade_total_carga()} kg")
 
@@ -34,10 +45,14 @@ class Carga:
         self.tipo_carga = tipo_carga
         self.descricao = descricao
         self.peso_suportado = peso_suportado
+
+        self.status = "não atribuída"
         
         self._x = None
         self._y = None
         self._z = None
+
+        self.peso_cima = None
 
         if (largura >= 4 or profundidade >= 4):
             self.largura = largura + 0.025
@@ -48,33 +63,36 @@ class Carga:
             self.altura = altura
             self.profundidade = profundidade
 
-        def get_x(self):
-            return self._x
+    def get_x(self):
+        return self._x
 
-        def get_y(self):
-            return self._y
+    def get_y(self):
+        return self._y
 
-        def get_z(self):
-            return self._z
+    def get_z(self):
+        return self._z
 
-        def set_x(self, x):
-            self._x = x
+    def set_x(self, x):
+        self._x = x
 
-        def set_y(self, y):
-            self._y = y
+    def set_y(self, y):
+        self._y = y
 
-        def set_z(self, z):
-            self._z = z
+    def set_z(self, z):
+        self._z = z
 
-        def volume(self):
-            return self.largura * self.altura * self.profundidade
+    def volume(self):
+        return self.largura * self.altura * self.profundidade
+    
+    def set_peso_cima(self, peso):
+        self.peso_cima = peso
 
-        def __str__(self):
-            return (f"Carga ID: {self.id}, Lote: {self.lote}\n"
-                    f"Depósito: {self.deposito}\n"
-                    f"Tipo de carga: {self.tipo_carga}\n"
-                    f"Peso bruto: {self.peso_bruto} kg | Peso suportado: {self.peso_suportado} kg\n"
-                    f"Dimensões (A x L x P): {self.altura:.3f} x {self.largura:.3f} x {self.profundidade:.3f} m\n"
-                    f"Volume: {self.volume():.3f} m³\n"
-                    f"Posição (x, y, z): {self._x}, {self._y}, {self._z}\n"
-                    f"Descrição: {self.descricao}")
+    def __str__(self):
+        return (f"Carga ID: {self.id}, Lote: {self.lote}\n"
+                f"Depósito: {self.deposito}\n"
+                f"Tipo de carga: {self.tipo_carga}\n"
+                f"Peso bruto: {self.peso_bruto} kg | Peso suportado: {self.peso_suportado} kg\n"
+                f"Dimensões (A x L x P): {self.altura:.3f} x {self.largura:.3f} x {self.profundidade:.3f} m\n"
+                f"Volume: {self.volume():.3f} m³\n"
+                f"Posição (x, y, z): {self._x}, {self._y}, {self._z}\n"
+                f"Descrição: {self.descricao}")
